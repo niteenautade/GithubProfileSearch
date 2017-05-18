@@ -10,6 +10,8 @@ app.controller('myCtrl', function($scope,$http) {
 		$http.get($scope.link)
 		    .then(function(response) {
 		        $scope.reposData.push(response.data);
+		 },function(response){
+		 	
 		 });
 	}
 	

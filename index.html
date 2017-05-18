@@ -3,19 +3,78 @@
 <head>
 	<title>GitSearch</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+
 	<script src="main.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" href="main.css">
 </head>
 <body ng-app="myApp" ng-controller="myCtrl">
-	<input type="text" ng-model="gitSearchTxt" ng-change="pressed()" class="form-control text-center" placeholder="Search an UserName">
-	
-	<div ng-repeat="item in reposData">
+	<div class="row" style="margin-top:20px;">
+		<div class="col-md-2">
+			<h1  style="padding-left:50px">GitSearch</h1>			
+		</div>
+		<div class="col-md-8">
+			<input type="text" ng-model="gitSearchTxt" ng-change="pressed()" class="form-control text-center" placeholder="Enter Username to Search">
+		</div>
+	</div>
+	<div ng-if="reposData.length==0 || !reposData">
+		<div class="text-center">
+			<h3>Search a User</h3>
+		</div>
+	</div>
+	<div class="col-container" ng-repeat="item in reposData" ng-if="reposData">
+	  <div class="col" style="width: 40%;">
+	  	<div>
+	  		<img src={{item[0].owner.avatar_url}} class="thumbnail img-responsive" style="height: 40%;width: 40%;float: left;margin-right: 20px;margin-left: 20px">
+	  		<div>
+		  		<p><b>Username: </b>{{item[0].owner.login}}</p>
+				<p><b>URL: </b><a href={{item[0].owner.html_url}}>{{item[0].owner.html_url}}</a></p>
+	  		</div>
+	  	</div>
+	  	
+	  </div>
+
+	  <div class="col" style="margin-right: 30px;">
+	  	<h3>Repositories:</h3>
+	    <div ng-repeat="ii in item | orderBy : '-created_at'" style="padding-left: 20px;border-left:solid 1px #ddd;border-right:solid 1px #ddd;border-top: solid 1px #ddd;">
+				<h4 style="margin:0 auto;padding-top: 20px;">{{ii.name}}</h4>
+				<p style="margin:0 auto;padding-left: 20px;"><b>Description: </b>{{ii.description}}</p>
+				<p style="margin:0 auto;padding-left: 20px;padding-bottom: 20px;"><b>Project URL: </b><a href={{ii.html_url}}>{{ii.html_url}}</a></p>
+		</div>
+	  </div>
+	</div>
+
+
+<!-- 
+	<div class="row" ng-repeat="item in reposData" style="display: table;width: 100%;">
+		
+		<div class="col-md-5" style="display: table-cell;background-color: green">
+			<div class="row">
+				<div class="col-md-5">
+					<img src={{item[0].owner.avatar_url}} class="thumbnail img-responsive" >
+				</div>
+				<div class="col-md-7">
+					<p><b>Username: </b>{{item[0].owner.login}}</p>
+					<p><b>URL: </b><a href={{item[0].owner.html_url}}>{{item[0].owner.html_url}}</a></p>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="col-md-7 " ng-repeat="ii in item" style="display: table-cell;background-color: yellow">
+			<div>
+				<p>{{ii.name}}</p>
+			</div>
+		</div>
+	</div> -->
+
+
+	<!-- <div ng-repeat="item in reposData">
 		<p>{{item[0].owner.login}}</p>
 		<ul ng-repeat="ii in item">
 			<li>Name :{{ii.name}}</li>
 		</ul>
-
-	</div>
+	</div> -->
 </body>
 </html>
+
