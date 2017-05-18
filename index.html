@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>GitSearch</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	<script src="main.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="main.css">
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+	<input type="text" ng-model="gitSearchTxt" ng-change="pressed()" class="form-control text-center" placeholder="Search an UserName">
+	
+	<div ng-repeat="item in reposData">
+		<p>{{item[0].owner.login}}</p>
+		<ul ng-repeat="ii in item">
+			<li>Name :{{ii.name}}</li>
+		</ul>
+
+	</div>
+</body>
+</html>
