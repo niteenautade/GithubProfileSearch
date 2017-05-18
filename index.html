@@ -17,7 +17,7 @@
 			<input type="text" ng-model="gitSearchTxt" ng-change="pressed()" class="form-control text-center" placeholder="Enter Username to Search">
 		</div>
 	</div>
-	<div ng-if="reposData.length==0 || !reposData">
+	<!-- <div ng-if="reposData.length==0 || !reposData">
 		<div class="text-center">
 			<h3>Search a User</h3>
 		</div>
@@ -42,15 +42,19 @@
 				<p style="margin:0 auto;padding-left: 20px;padding-bottom: 20px;"><b>Project URL: </b><a href={{ii.html_url}}>{{ii.html_url}}</a></p>
 		</div>
 	  </div>
+	</div> -->
+
+
+ 	<div ng-if="reposData.length==0 || !reposData">
+		<div class="text-center">
+			<h3>Search a User</h3>
+		</div>
 	</div>
-
-
-<!-- 
-	<div class="row" ng-repeat="item in reposData" style="display: table;width: 100%;">
+	<div class="row" ng-repeat="item in reposData" ng-if="reposData" style="padding-top: 40px;">
 		
-		<div class="col-md-5" style="display: table-cell;background-color: green">
+		<div class="col-md-5">
 			<div class="row">
-				<div class="col-md-5">
+				<div class="col-md-5 text-center" style="padding-left: 20px;">
 					<img src={{item[0].owner.avatar_url}} class="thumbnail img-responsive" >
 				</div>
 				<div class="col-md-7">
@@ -61,12 +65,15 @@
 
 		</div>
 
-		<div class="col-md-7 " ng-repeat="ii in item" style="display: table-cell;background-color: yellow">
-			<div>
-				<p>{{ii.name}}</p>
+		<div class="col-md-7">
+			<div ng-repeat="ii in item | orderBy : '-created_at'" style="padding-left: 20px;border-left:solid 1px #ddd;border-right:solid 1px #ddd;border-top: solid 1px #ddd;">
+				<h4 style="margin:0 auto;padding-top: 20px;">{{ii.name}}</h4>
+				<p style="margin:0 auto;padding-left: 20px;"><b>Description: </b>{{ii.description}}</p>
+				<p style="margin:0 auto;padding-left: 20px;padding-bottom: 20px;"><b>Project URL: </b><a href={{ii.html_url}}>{{ii.html_url}}</a></p>
 			</div>
 		</div>
-	</div> -->
+
+	</div> 
 
 
 	<!-- <div ng-repeat="item in reposData">
